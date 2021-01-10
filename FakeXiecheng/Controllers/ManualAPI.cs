@@ -7,7 +7,15 @@ using System.Threading.Tasks;
 namespace FakeXiecheng.Controllers
 {
     [Route("api/manualapi")]
-    public class ManualAPI
+
+    public class ManualAPIController
     {
+        // GET: api/<TestAPIController>
+        [HttpGet]
+
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "A1", "A2" };
+        }
     }
 }
