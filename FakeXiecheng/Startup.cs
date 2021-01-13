@@ -1,3 +1,4 @@
+using FakeXiecheng.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,6 +18,10 @@ namespace FakeXiecheng
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            // ×¢²á²Ö¿â
+            services.AddTransient<ITouristRouteRepository, MockTouristRouteRepository>();
+            //services.AddSingleton<ITouristRouteRepository, MockTouristRouteRepository>();
+            //services.AddScoped<ITouristRouteRepository, MockTouristRouteRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

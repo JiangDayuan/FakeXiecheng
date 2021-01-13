@@ -1,25 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code\\CSharp\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj": {}
+    "C:\\Users\\ZCFJIAN1\\source\\repos\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj": {}
   },
   "projects": {
-    "D:\\Code\\CSharp\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj": {
+    "C:\\Users\\ZCFJIAN1\\source\\repos\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\CSharp\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj",
+        "projectUniqueName": "C:\\Users\\ZCFJIAN1\\source\\repos\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj",
         "projectName": "FakeXiecheng",
-        "projectPath": "D:\\Code\\CSharp\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj",
-        "packagesPath": "C:\\Users\\maxji\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\CSharp\\FakeXiecheng\\FakeXiecheng\\obj\\",
+        "projectPath": "C:\\Users\\ZCFJIAN1\\source\\repos\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj",
+        "packagesPath": "C:\\Users\\ZCFJIAN1\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ZCFJIAN1\\source\\repos\\FakeXiecheng\\FakeXiecheng\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\maxji\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\ZCFJIAN1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
