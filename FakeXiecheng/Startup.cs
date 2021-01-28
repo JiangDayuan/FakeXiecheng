@@ -1,3 +1,4 @@
+using FakeXiecheng.Database;
 using FakeXiecheng.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace FakeXiecheng
 {
@@ -22,6 +24,11 @@ namespace FakeXiecheng
             services.AddTransient<ITouristRouteRepository, MockTouristRouteRepository>();
             //services.AddSingleton<ITouristRouteRepository, MockTouristRouteRepository>();
             //services.AddScoped<ITouristRouteRepository, MockTouristRouteRepository>();
+            services.AddDbContext<AppDbContext>(option =>
+            {
+                //option.UseSqlServer("server=localhost; Database=FakeXiechengDb; User Id=sa; Password=Jiang123456"); // docker
+                option.UseSqlServer("Data Source=localhost;User ID=sa;Password=Jiang123456;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"); // docker
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
