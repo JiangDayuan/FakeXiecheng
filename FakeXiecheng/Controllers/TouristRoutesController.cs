@@ -1,4 +1,5 @@
-﻿using FakeXiecheng.Services;
+﻿using FakeXiecheng.Dtos;
+using FakeXiecheng.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,10 +20,29 @@ namespace FakeXiecheng.Controllers
             _touristRouteRepository = touristRouteRepository;
         }
 
+        [HttpGet]
         public IActionResult GetTouristRoutes()
         {
-            var routes = _touristRouteRepository.GetTouristRoutes();
-            return Ok(routes);
+            var touristRoutesFromRepo = _touristRouteRepository.GetTouristRoutes();
+            if (touristRoutesFromRepo == null || touristRoutesFromRepo.Count() <= 0)
+            {
+                return NotFound("没有旅游路线");
+            }
+            return Ok(_touristRouteRepository.GetTouristRoutes());
+        }
+
+        //api/touristroutes/{touristRouteId}
+        [HttpGet("{touristRouteId:Guid}")]
+        public IActionResult GetTouristRouteById(Guid touristRouteId)
+        {
+            var touristRouteFromRepo = _touristRouteRepository.GetTouristRoute(touristRouteId);
+            if (touristRouteFromRepo == null)
+            {
+                return NotFound($"旅游路线{touristRouteId}找不到");
+            }
+            var touristRouteDto = new TouristRouteDto();
+            return Ok(touristRouteFromRepo);
+
         }
     }
 }
