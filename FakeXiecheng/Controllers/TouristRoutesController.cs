@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace FakeXiecheng.Controllers
 {
@@ -14,10 +15,12 @@ namespace FakeXiecheng.Controllers
     public class TouristRoutesController : ControllerBase
     {
         private ITouristRouteRepository _touristRouteRepository;
+        private readonly IMapper _mapper;
 
-        public TouristRoutesController(ITouristRouteRepository touristRouteRepository)
+        public TouristRoutesController(ITouristRouteRepository touristRouteRepository, IMapper mapper)
         {
             _touristRouteRepository = touristRouteRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -40,8 +43,8 @@ namespace FakeXiecheng.Controllers
             {
                 return NotFound($"旅游路线{touristRouteId}找不到");
             }
-            var touristRouteDto = new TouristRouteDto();
-            return Ok(touristRouteFromRepo);
+            var touristRouteDto = _mapper.Map<TouristRouteDto>(touristRouteFromRepo);
+            return Ok(touristRouteDto);
 
         }
     }

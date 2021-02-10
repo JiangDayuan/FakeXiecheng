@@ -44,8 +44,11 @@ namespace FakeXiecheng
                 //option.UseSqlServer("server=localhost; Database=FakeXiechengDb; User Id=sa; Password=Jiang123456"); // docker
                 //option.UseSqlServer(@"Data Source=ZC01N02188\QFLOW;Initial Catalog=FakeXiecheng;User ID=sa;Password=Jiang123456;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"); // docker
                 //option.UseSqlServer(Configuration["DbContext:ConnectionString"]);
-                option.UseMySql(Configuration["DbContext:MySQLConnectionString"]);
+                option.UseMySql(Configuration["DbContext:MySQLConnectionString"]); //MySql
             });
+
+            // É¨ÃèprofileÎÄ¼þ
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

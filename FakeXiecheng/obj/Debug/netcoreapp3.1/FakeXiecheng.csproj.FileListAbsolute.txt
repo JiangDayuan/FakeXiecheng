@@ -84,3 +84,5 @@ C:\Users\ZCFJIAN1\source\repos\FakeXiecheng\FakeXiecheng\bin\Debug\netcoreapp3.1
 C:\Users\ZCFJIAN1\source\repos\FakeXiecheng\FakeXiecheng\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 C:\Users\ZCFJIAN1\source\repos\FakeXiecheng\FakeXiecheng\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\ZCFJIAN1\source\repos\FakeXiecheng\FakeXiecheng\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\ZCFJIAN1\source\repos\FakeXiecheng\FakeXiecheng\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\ZCFJIAN1\source\repos\FakeXiecheng\FakeXiecheng\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
