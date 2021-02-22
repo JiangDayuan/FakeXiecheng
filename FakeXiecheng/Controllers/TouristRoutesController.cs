@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using System.Text.RegularExpressions;
+using FakeXiecheng.ResourceParameters;
+using FakeXiecheng.Models;
 
 namespace FakeXiecheng.Controllers
 {
@@ -24,18 +27,32 @@ namespace FakeXiecheng.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetTouristRoutes()
+        [HttpHead]
+        public IActionResult GetTouristRoutes([FromQuery] TouristRouteResourceParameters parameters)
         {
-            var touristRoutesFromRepo = _touristRouteRepository.GetTouristRoutes();
+            //Regex regex = new Regex(@"([A-Za-z0-9\-]+)(\d+)");
+            //Regex regexDoubleSide = new Regex(@"\[(\s|\d+)\,(\s|\d+)\]");
+            //Match match = regex.Match(rating);
+            //if (match.Success)
+            //{
+            //    minRating = match.Groups[1].Value;
+            //    maxRating = match.Groups[2].Value;
+            //}
+
+            
+            
+            var touristRoutesFromRepo = _touristRouteRepository.GetTouristRoutes(parameters.title, parameters.minRating, parameters.maxRating);
             if (touristRoutesFromRepo == null || touristRoutesFromRepo.Count() <= 0)
             {
                 return NotFound("没有旅游路线");
             }
-            return Ok(_touristRouteRepository.GetTouristRoutes());
+            var touristRoutesDto = _mapper.Map<IEnumerable<TouristRouteDto>>(touristRoutesFromRepo);
+            return Ok(touristRoutesDto);
         }
 
         //api/touristroutes/{touristRouteId}
-        [HttpGet("{touristRouteId:Guid}")]
+        [HttpGet("{touristRouteId:Guid}", Name = "GetTouristRouteById")]
+        [HttpHead("{touristRouteId:Guid}")]
         public IActionResult GetTouristRouteById(Guid touristRouteId)
         {
             var touristRouteFromRepo = _touristRouteRepository.GetTouristRoute(touristRouteId);
@@ -46,6 +63,20 @@ namespace FakeXiecheng.Controllers
             var touristRouteDto = _mapper.Map<TouristRouteDto>(touristRouteFromRepo);
             return Ok(touristRouteDto);
 
+        }
+
+        [HttpPost]
+        public IActionResult GreateTouristRoute([FromBody] TouristRouteForCreationDto touristRouteForCreationDto)
+        {
+            var touristRouteModel = _mapper.Map<TouristRoute>(touristRouteForCreationDto);
+            _touristRouteRepository.AddTouristRoute(touristRouteModel);
+            _touristRouteRepository.Save();
+            var touristRouteForReturn = _mapper.Map<TouristRouteDto>(touristRouteModel);
+            return CreatedAtRoute(
+                "GetTouristRouteById",
+                new { touristRouteId = touristRouteForReturn.Id},
+                touristRouteForReturn
+            );
         }
     }
 }

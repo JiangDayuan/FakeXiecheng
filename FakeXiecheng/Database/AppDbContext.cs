@@ -34,13 +34,9 @@ namespace FakeXiecheng.Database
             //});
 
             // 从json中导入数据
-            //var touristRouteJsonData = File.ReadAllText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"/Database/touristRoutesMockData.json");
-            //IList<TouristRoute> touristRoutes = JsonConvert.DeserializeObject<IList<TouristRoute>>(touristRouteJsonData);
             IList<TouristRoute> touristRoutes =  GetJsonData<TouristRoute>(@"/Database/touristRoutesMockData.json");
             modelBuilder.Entity<TouristRoute>().HasData(touristRoutes);
 
-            //var touristRoutePictureJsonData = File.ReadAllText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"/Database/touristRoutePicturesMockData.json");
-            //IList<TouristRoutePicture> touristPictureRoutes = JsonConvert.DeserializeObject<IList<TouristRoutePicture>>(touristRoutePictureJsonData);
             IList<TouristRoutePicture> touristPictureRoutes = GetJsonData<TouristRoutePicture>(@"/Database/touristRoutePicturesMockData.json");
             modelBuilder.Entity<TouristRoutePicture>().HasData(touristPictureRoutes);
 

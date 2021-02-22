@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ZCFJIAN1\\source\\repos\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj": {}
+    "D:\\Code\\CSharp\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ZCFJIAN1\\source\\repos\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj": {
+    "D:\\Code\\CSharp\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ZCFJIAN1\\source\\repos\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj",
+        "projectUniqueName": "D:\\Code\\CSharp\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj",
         "projectName": "FakeXiecheng",
-        "projectPath": "C:\\Users\\ZCFJIAN1\\source\\repos\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj",
-        "packagesPath": "C:\\Users\\ZCFJIAN1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ZCFJIAN1\\source\\repos\\FakeXiecheng\\FakeXiecheng\\obj\\",
+        "projectPath": "D:\\Code\\CSharp\\FakeXiecheng\\FakeXiecheng\\FakeXiecheng.csproj",
+        "packagesPath": "C:\\Users\\maxji\\.nuget\\packages\\",
+        "outputPath": "D:\\Code\\CSharp\\FakeXiecheng\\FakeXiecheng\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ZCFJIAN1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maxji\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -84,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

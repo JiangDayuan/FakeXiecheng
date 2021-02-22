@@ -1,14 +1,12 @@
-﻿using FakeXiecheng.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace FakeXiecheng.Dtos
 {
-    public class TouristRouteDto
+    public class TouristRouteForCreationDto
     {
-        public Guid Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         // 计算方式：原价 * 折扣
@@ -25,6 +23,5 @@ namespace FakeXiecheng.Dtos
         public string TravelDays { get; set; }
         public string TripType { get; set; }
         public string DepartureCity { get; set; }
-        public ICollection<TouristRoutePictureDto> TouristRoutePictures { get; set; }
     }
 }
