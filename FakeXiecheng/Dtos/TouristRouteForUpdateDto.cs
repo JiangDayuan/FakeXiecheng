@@ -1,5 +1,4 @@
-﻿using FakeXiecheng.ValidationAttributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace FakeXiecheng.Dtos
 {
-    [TouristRouteTitleMustBeDifferentFromDescriptionAttribute]
-    public class TouristRouteForCreationDto// : IValidatableObject
+    public class TouristRouteForUpdateDto
     {
         [Required(ErrorMessage = "title 不可为空")]
         [MaxLength(100)]
@@ -32,16 +30,5 @@ namespace FakeXiecheng.Dtos
         public string DepartureCity { get; set; }
         public ICollection<TouristRoutePictureForCreationDto> TouristRoutePictures { get; set; }
             = new List<TouristRoutePictureForCreationDto>();
-
-        //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        //{
-        //    if (Title == Description)
-        //    {
-        //        yield return new ValidationResult(
-        //            "路线名称必须和路线描述不同",
-        //            new[] { "TouristRouteForCreationDto" }
-        //            );
-        //    }
-        //}
     }
 }

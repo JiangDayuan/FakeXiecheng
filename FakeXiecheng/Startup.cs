@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FakeXiecheng
 {
@@ -33,7 +34,25 @@ namespace FakeXiecheng
                 //setupAction.OutputFormatters.Add(
                 //    new XmlDataContractSerializerOutputFormatter()
                 //);
-            }).AddXmlDataContractSerializerFormatters();
+            }).AddXmlDataContractSerializerFormatters()
+            .ConfigureApiBehaviorOptions(setupAction => { // 数据验证失败，抛出422错误
+                setupAction.InvalidModelStateResponseFactory = context =>
+                {
+                    var problemDetail = new ValidationProblemDetails(context.ModelState)
+                    {
+                        Type = "",
+                        Title = "数据验证失败",
+                        Status = StatusCodes.Status422UnprocessableEntity,
+                        Detail = "",
+                        Instance = context.HttpContext.Request.Path
+                    };
+                    problemDetail.Extensions.Add("traceId", context.HttpContext.TraceIdentifier);
+                    return new UnprocessableEntityObjectResult(problemDetail)
+                    {
+                        ContentTypes = { "application/problem+json" }
+                    };
+                };
+            });
 
             // 通过Entity Framwork注册仓库
             services.AddTransient<ITouristRouteRepository, TouristRouteRepository>();
@@ -44,8 +63,8 @@ namespace FakeXiecheng
             {
                 //option.UseSqlServer("server=localhost; Database=FakeXiechengDb; User Id=sa; Password=Jiang123456"); // docker
                 //option.UseSqlServer(@"Data Source=ZC01N02188\QFLOW;Initial Catalog=FakeXiecheng;User ID=sa;Password=Jiang123456;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"); // docker
-                option.UseSqlServer(Configuration["DbContext:HomeConnectionString"]);
-                //option.UseMySql(Configuration["DbContext:MySQLConnectionString"]); //MySql
+                //option.UseSqlServer(Configuration["DbContext:HomeConnectionString"]);
+                option.UseMySql(Configuration["DbContext:MySQLConnectionString"]); //MySql
             });
 
             // 扫描profile文件
