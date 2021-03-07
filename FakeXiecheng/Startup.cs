@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Serialization;
 
 namespace FakeXiecheng
 {
@@ -34,7 +35,12 @@ namespace FakeXiecheng
                 //setupAction.OutputFormatters.Add(
                 //    new XmlDataContractSerializerOutputFormatter()
                 //);
-            }).AddXmlDataContractSerializerFormatters()
+            })
+            .AddNewtonsoftJson(setupAction => {
+                setupAction.SerializerSettings.ContractResolver =
+                new CamelCasePropertyNamesContractResolver();
+            })
+            .AddXmlDataContractSerializerFormatters()
             .ConfigureApiBehaviorOptions(setupAction => { // 数据验证失败，抛出422错误
                 setupAction.InvalidModelStateResponseFactory = context =>
                 {
@@ -63,8 +69,8 @@ namespace FakeXiecheng
             {
                 //option.UseSqlServer("server=localhost; Database=FakeXiechengDb; User Id=sa; Password=Jiang123456"); // docker
                 //option.UseSqlServer(@"Data Source=ZC01N02188\QFLOW;Initial Catalog=FakeXiecheng;User ID=sa;Password=Jiang123456;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"); // docker
-                //option.UseSqlServer(Configuration["DbContext:HomeConnectionString"]);
-                option.UseMySql(Configuration["DbContext:MySQLConnectionString"]); //MySql
+                option.UseSqlServer(Configuration["DbContext:HomeConnectionString"]);
+                //option.UseMySql(Configuration["DbContext:MySQLConnectionString"]); //MySql
             });
 
             // 扫描profile文件

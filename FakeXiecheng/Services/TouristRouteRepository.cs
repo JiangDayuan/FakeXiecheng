@@ -18,47 +18,25 @@ namespace FakeXiecheng.Services
             _context = context;
         }
 
-        public void AddTouristRoute(TouristRoute touristRoute)
+        
+
+        public async Task<TouristRoutePicture> GetPictureAsync(int pictureId)
         {
-            if (touristRoute == null)
-            {
-                throw new ArgumentNullException(nameof(touristRoute));
-            }
-            _context.TouristRoutes.Add(touristRoute);
+            return await _context.TouristRoutePictures.FirstOrDefaultAsync(p => p.Id == pictureId);
         }
 
-        public void AddTouristRoutePicture(Guid touristRouteId, TouristRoutePicture touristRoutePicture)
+        public async Task<TouristRoute> GetTouristRouteAsync(Guid touristRouteId)
         {
-            if (touristRouteId == Guid.Empty)
-            {
-                throw new ArgumentNullException(nameof(touristRouteId));
-            }
-            if (touristRoutePicture == null)
-            {
-                throw new ArgumentNullException(nameof(touristRoutePicture));
-            }
-
-            touristRoutePicture.TouristRouteId = touristRouteId;
-            _context.TouristRoutePictures.Add(touristRoutePicture);
+            return await _context.TouristRoutes.Include(t => t.TouristRoutePictures).FirstOrDefaultAsync(n => n.Id == touristRouteId);
         }
 
-        public TouristRoutePicture GetPicture(int pictureId)
+        public async Task<IEnumerable<TouristRoutePicture>> GetTouristRoutePicturesAsync(Guid touristRouteId)
         {
-            return _context.TouristRoutePictures.FirstOrDefault(p => p.Id == pictureId);
+            return await _context.TouristRoutePictures.
+                Where(p => p.TouristRouteId == touristRouteId).ToListAsync();
         }
 
-        public TouristRoute GetTouristRoute(Guid touristRouteId)
-        {
-            return _context.TouristRoutes.Include(t => t.TouristRoutePictures).FirstOrDefault(n => n.Id == touristRouteId);
-        }
-
-        public IEnumerable<TouristRoutePicture> GetTouristRoutePictures(Guid touristRouteId)
-        {
-            return _context.TouristRoutePictures.
-                Where(p => p.TouristRouteId == touristRouteId).ToList();
-        }
-
-        public IEnumerable<TouristRoute> GetTouristRoutes(string title, string minRating, string maxRating)
+        public async Task<IEnumerable<TouristRoute>> GetTouristRoutesAsync(string title, string minRating, string maxRating)
         {
             // 生产SQL语句，还没有查询(延迟执行)
             IQueryable<TouristRoute> result = _context.TouristRoutes.
@@ -98,17 +76,63 @@ namespace FakeXiecheng.Services
             // Join 通过手动的方式链接表格
 
             // 聚合操作，执行sql语句 ToList(), SingleOrDefault(), Count()
-            return result.ToList();
+            return await result.ToListAsync();
         }
 
-        public bool Save()
+        public async Task<IEnumerable<TouristRoute>> GetTouristRoutesByIDListAsync(IEnumerable<Guid> ids)
         {
-            return (_context.SaveChanges() >= 0);
+            return await _context.TouristRoutes.Where(t => ids.Contains(t.Id)).ToListAsync();
         }
 
-        public bool TouristRouteExists(Guid touristRouteId)
+        public async Task<bool> TouristRouteExistsAsync(Guid touristRouteId)
         {
-            return _context.TouristRoutes.Any(t => t.Id == touristRouteId);
+            return await _context.TouristRoutes.AnyAsync(t => t.Id == touristRouteId);
         }
+
+        public void DeleteTouristRoutes(IEnumerable<TouristRoute> touristRoutes)
+        {
+            _context.TouristRoutes.RemoveRange(touristRoutes);
+        }
+
+        public void AddTouristRoute(TouristRoute touristRoute)
+        {
+            if (touristRoute == null)
+            {
+                throw new ArgumentNullException(nameof(touristRoute));
+            }
+            _context.TouristRoutes.Add(touristRoute);
+        }
+
+        public void AddTouristRoutePicture(Guid touristRouteId, TouristRoutePicture touristRoutePicture)
+        {
+            if (touristRouteId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(touristRouteId));
+            }
+            if (touristRoutePicture == null)
+            {
+                throw new ArgumentNullException(nameof(touristRoutePicture));
+            }
+
+            touristRoutePicture.TouristRouteId = touristRouteId;
+            _context.TouristRoutePictures.Add(touristRoutePicture);
+        }
+
+        public void DeleteTouristRoute(TouristRoute touristRoute)
+        {
+            _context.TouristRoutes.Remove(touristRoute);
+        }
+
+        public void DeleteTouristRoutePicture(TouristRoutePicture picture)
+        {
+            _context.TouristRoutePictures.Remove(picture);
+        }
+
+        public async Task<bool> SaveAsync()
+        {
+            return (await _context.SaveChangesAsync() >= 0);
+        }
+
+        
     }
 }

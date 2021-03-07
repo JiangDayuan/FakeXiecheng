@@ -8,13 +8,17 @@ namespace FakeXiecheng.Services
 {
     public interface ITouristRouteRepository
     {
-        IEnumerable<TouristRoute> GetTouristRoutes(string title, string minRating, string maxRating);
-        TouristRoute GetTouristRoute(Guid touristRouteId);
-        bool TouristRouteExists(Guid touristRouteId);
-        IEnumerable<TouristRoutePicture> GetTouristRoutePictures(Guid touristRouteId);
-        TouristRoutePicture GetPicture(int pictureId);
+        Task<IEnumerable<TouristRoute>> GetTouristRoutesAsync(string title, string minRating, string maxRating);
+        Task<TouristRoute> GetTouristRouteAsync(Guid touristRouteId);
+        Task<bool> TouristRouteExistsAsync(Guid touristRouteId);
+        Task<IEnumerable<TouristRoutePicture>> GetTouristRoutePicturesAsync(Guid touristRouteId);
+        Task<TouristRoutePicture> GetPictureAsync(int pictureId);
+        Task<IEnumerable<TouristRoute>> GetTouristRoutesByIDListAsync(IEnumerable<Guid> ids);
         void AddTouristRoute(TouristRoute touristRoute);
-        bool Save();
         void AddTouristRoutePicture(Guid touristRouteId, TouristRoutePicture touristRoutePicture);
+        void DeleteTouristRoute(TouristRoute touristRoute);
+        void DeleteTouristRoutePicture(TouristRoutePicture picture);
+        void DeleteTouristRoutes(IEnumerable<TouristRoute> touristRoutes);
+        Task<bool> SaveAsync();
     }
 }
